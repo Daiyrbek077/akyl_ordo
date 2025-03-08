@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Акыл ордо</title>
+	<link rel="shortcut icon" href="img/2.png">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script>
+		function openModal(question, answer, imageSrc, button) {
+			let openedQuestions = JSON.parse(localStorage.getItem('openedQuestions')) || {};
+			if (openedQuestions[question]) return;
+
+			document.getElementById('modal-question').innerText = question;
+			document.getElementById('modal-answer').innerText = answer;
+			document.getElementById('modal-answer').style.display = 'none';
+			document.getElementById('modal-img').src = imageSrc;
+			document.getElementById('modal-img').style.display = imageSrc ? 'block' : 'none';
+			document.getElementById('modal').style.display = 'block';
+
+			button.classList.add('disabled');
+			button.style.background = '#aaa';
+			button.style.cursor = 'not-allowed';
+
+			openedQuestions[question] = true;
+			localStorage.setItem('openedQuestions', JSON.stringify(openedQuestions));
+		}
+
+		function showAnswer() {
+			document.getElementById('modal-answer').style.display = 'block';
+		}
+
+		function closeModal() {
+			document.getElementById('modal').style.display = 'none';
+		}
+
+		function updateScore(team, change) {
+			let score = parseInt(localStorage.getItem(team) || '0');
+			score += change;
+			if (score < 0) score = 0;
+			localStorage.setItem(team, score);
+			document.getElementById(team).innerText = score;
+		}
+
+		function loadGameState() {
+			document.querySelectorAll('.score').forEach(el => {
+				let team = el.id;
+				el.innerText = localStorage.getItem(team) || '0';
+			});
+			let openedQuestions = JSON.parse(localStorage.getItem('openedQuestions')) || {};
+			document.querySelectorAll('.category button').forEach(button => {
+				if (openedQuestions[button.innerText]) {
+					button.classList.add('disabled');
+					button.style.background = '#aaa';
+					button.style.cursor = 'not-allowed';
+				}
+			});
+		}
+
+		function resetGame() {
+			localStorage.clear();
+			location.reload();
+		}
+
+		window.onload = loadGameState;
+	</script>
+</head>
+
+<body>
+	<header class="header">
+		<img class="logo" src="img/Акыл-ордо-лого-темный-безфон.svg" alt="">
+		<h1>Акыл ордо</h1>
+		<button class="reset-button" onclick="resetGame()">Жаңылоо</button>
+	</header>
+
+	<div class="categories">
+		<div class="category">
+			<h2>Кино</h2>
+			<button onclick="openModal('Кино 500 суроо', 'Кино 500 жообу', 'img/1.jpg', this)">500</button>
+			<button onclick="openModal('Кино 400 суроо', 'Кино 400 жообу', 'img/2.jpg', this)">400</button>
+			<button onclick="openModal('Кино 300 суроо', 'Кино 300 жообу', '', this)">300</button>
+			<button onclick="openModal('Кино 200 суроо', 'Кино 200 жообу', '', this)">200</button>
+			<button onclick="openModal('Кино 100 суроо', 'Кино 100 жообу', '', this)">100</button>
+		</div>
+
+		<div class="category">
+			<h2>Кино</h2>
+			<button onclick="openModal('Кино 500 суроо', 'Кино 500 жообу', 'img/1.jpg', this)">500</button>
+			<button onclick="openModal('Кино 400 суроо', 'Кино 400 жообу', 'img/2.jpg', this)">400</button>
+			<button onclick="openModal('Кино 300 суроо', 'Кино 300 жообу', '', this)">300</button>
+			<button onclick="openModal('Кино 200 суроо', 'Кино 200 жообу', '', this)">200</button>
+			<button onclick="openModal('Кино 100 суроо', 'Кино 100 жообу', '', this)">100</button>
+		</div>
+
+		<div class="category">
+			<h2>Кино</h2>
+			<button onclick="openModal('Кино 500 суроо', 'Кино 500 жообу', 'img/1.jpg', this)">500</button>
+			<button onclick="openModal('Кино 400 суроо', 'Кино 400 жообу', 'img/2.jpg', this)">400</button>
+			<button onclick="openModal('Кино 300 суроо', 'Кино 300 жообу', '', this)">300</button>
+			<button onclick="openModal('Кино 200 суроо', 'Кино 200 жообу', '', this)">200</button>
+			<button onclick="openModal('Кино 100 суроо', 'Кино 100 жообу', '', this)">100</button>
+		</div>
+		<div class="category">
+			<h2>Кино</h2>
+			<button onclick="openModal('Кино 500 суроо', 'Кино 500 жообу', 'img/1.jpg', this)">500</button>
+			<button onclick="openModal('Кино 400 суроо', 'Кино 400 жообу', 'img/2.jpg', this)">400</button>
+			<button onclick="openModal('Кино 300 суроо', 'Кино 300 жообу', '', this)">300</button>
+			<button onclick="openModal('Кино 200 суроо', 'Кино 200 жообу', '', this)">200</button>
+			<button onclick="openModal('Кино 100 суроо', 'Кино 100 жообу', '', this)">100</button>
+		</div>
+		<div class="category">
+			<h2>Кино</h2>
+			<button onclick="openModal('Кино 500 суроо', 'Кино 500 жообу', 'img/1.jpg', this)">500</button>
+			<button onclick="openModal('Кино 400 суроо', 'Кино 400 жообу', 'img/2.jpg', this)">400</button>
+			<button onclick="openModal('Кино 300 суроо', 'Кино 300 жообу', '', this)">300</button>
+			<button onclick="openModal('Кино 200 суроо', 'Кино 200 жообу', '', this)">200</button>
+			<button onclick="openModal('Кино 100 суроо', 'Кино 100 жообу', '', this)">100</button>
+		</div>
+	</div>
+
+	<div class="commands">
+		<article class="command">
+			<p class="title-cmd">1-команда</p>
+			<div class="btn-score">
+				<button class="btn-score-edit" onclick="updateScore('team1', -100)">-</button>
+				<p class="score" id="team1">0</p>
+				<button class="btn-score-edit" onclick="updateScore('team1', 100)">+</button>
+			</div>
+		</article>
+		<article class="command">
+			<p class="title-cmd">2-команда</p>
+			<div class="btn-score">
+				<button class="btn-score-edit" onclick="updateScore('team2', -100)">-</button>
+				<p class="score" id="team2">0</p>
+				<button class="btn-score-edit" onclick="updateScore('team2', 100)">+</button>
+			</div>
+		</article>
+
+		<article class="command">
+			<p class="title-cmd">3-команда</p>
+			<div class="btn-score">
+				<button class="btn-score-edit" onclick="updateScore('team3', -100)">-</button>
+				<p class="score" id="team3">0</p>
+				<button class="btn-score-edit" onclick="updateScore('team3', 100)">+</button>
+			</div>
+		</article>
+
+		<article class="command">
+			<p class="title-cmd">4-команда</p>
+			<div class="btn-score">
+				<button class="btn-score-edit" onclick="updateScore('team4', -100)">-</button>
+				<p class="score" id="team4">0</p>
+				<button class="btn-score-edit" onclick="updateScore('team4', 100)">+</button>
+			</div>
+		</article>
+
+		<article class="command">
+			<p class="title-cmd">5-команда</p>
+			<div class="btn-score">
+				<button class="btn-score-edit" onclick="updateScore('team5', -100)">-</button>
+				<p class="score" id="team5">0</p>
+				<button class="btn-score-edit" onclick="updateScore('team5', 100)">+</button>
+			</div>
+		</article>
+	</div>
+
+	<div id="modal" class="modal">
+		<span onclick="closeModal()" class="close-btn">&times;</span>
+		<h2 id="modal-question"></h2>
+		<img id="modal-img" src="" alt="Сүрөт" style="display:none; max-width: 100%; height: auto; margin-top: 10px;">
+		<p id="modal-answer"></p>
+		<button class="answer" onclick="showAnswer()">Жообу</button>
+	</div>
+</body>
+
+</html>
